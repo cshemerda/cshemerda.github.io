@@ -1,0 +1,127 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background-color: #0d0d0d;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Header */
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.nav-links a {
+  margin: 0 15px;
+  text-decoration: none;
+  color: #ccc;
+  font-size: 14px;
+}
+
+.nav-links a:hover {
+  color: #fff;
+}
+
+.app-store img {
+  height: 35px;
+}
+
+/* Main Content */
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.gradient-text {
+  font-size: 64px;
+  font-weight: 800;
+  background: linear-gradient(90deg, #2ecc71, #00cec9, #0984e3, #6c5ce7, #e84393, #d63031, #fdcb6e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 20px;
+}
+
+.subtitle {
+  font-size: 18px;
+  color: #bbb;
+  margin-bottom: 40px;
+  line-height: 1.5;
+}
+
+.notify-form {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.notify-form input {
+  padding: 15px 20px;
+  border: none;
+  border-radius: 8px 0 0 8px;
+  outline: none;
+  width: 320px;
+  font-size: 14px;
+  background: #1e1e1e;
+  color: #fff;
+}
+
+.notify-form button {
+  padding: 15px 25px;
+  border: none;
+  border-radius: 0 8px 8px 0;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  background: #fff;
+  color: #000;
+  transition: background 0.2s ease;
+}
+
+.notify-form button:hover {
+  background: #ddd;
+}
+
+.small-text {
+  font-size: 12px;
+  color: #777;
+}
+
+/* Footer */
+footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 40px;
+  font-size: 13px;
+  color: #aaa;
+}
+
+footer a {
+  text-decoration: none;
+  color: #aaa;
+  margin: 0 5px;
+}
+
+footer a:hover {
+  color: #fff;
+}
