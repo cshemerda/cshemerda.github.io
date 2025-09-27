@@ -5,7 +5,6 @@
 /* Allow scrolling */
 html, body {
   margin: 0;
-  height: auto;
   min-height: 100%;
   overflow-x: hidden;          /* prevent sideways scroll */
   overflow-y: auto !important; /* allow vertical scroll */
@@ -18,26 +17,22 @@ body {
   line-height: 1.35;
 }
 
+/* Flex wrapper */
 .wrap {
-  display: grid;
-  grid-template-rows: auto 1fr auto; /* header | main | footer */
-  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;   /* full viewport height */
 }
 
-.main {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 56px;
-  align-items: center;  /* vertical centering */
-  justify-content: center;
-  height: 100%;         /* <<< force it to take full grid row */
-}
 /* Centered container */
 .container {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 80px;             /* desktop spacing */
+  flex: 1;                     /* take available space */
+  display: flex;
+  flex-direction: column;
 }
 
 /* Top bar */
@@ -56,7 +51,7 @@ body {
 }
 
 .brand-logo img {
-  width: 80px;
+  width: 30px; /* smaller logo */
   height: auto;
   object-fit: contain;
   filter: brightness(0) invert(0);
@@ -97,13 +92,13 @@ body {
   transform: scale(1.1);
 }
 
-/* Main */
+/* Main (desktop = grid, mobile = flex below) */
 .main {
+  flex: 1;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 56px;
+  grid-template-columns: 1fr 1fr;
   align-items: center;   /* vertical centering */
-  min-height: 0;         /* allows flex/grid to distribute properly */
+  gap: 56px;
 }
 .left {
   display: flex;
@@ -120,7 +115,7 @@ body {
 h1 {
   font-family: "Poppins", sans-serif;
   font-weight: 600;
-  font-size: 48px;
+  font-size: 44px;  /* adjusted so "Our new website" stays on one line */
   line-height: 1.25;
   margin: 0 0 14px;
 }
@@ -192,9 +187,10 @@ h1 {
   justify-content: center;
 }
 .hero img {
-  max-width: 100%;
+  width: 92%;         /* slightly smaller inside its column */
+  max-width: 500px;   /* cap size so it doesn’t dominate */
   height: auto;
-  max-height: 70dvh;     /* prevents oversized hero */
+  max-height: 65dvh;  /* was 70dvh */
   object-fit: contain;
   object-position: center;
 }
@@ -242,17 +238,21 @@ h1 {
     padding: 0 40px; /* tablet spacing */
   }
   .main {
-    grid-template-columns: 1fr;
-    gap: 28px;
+    display: flex;         /* switch from grid to flex */
+    flex-direction: column;
     text-align: center;
+    gap: 28px;
   }
   .left {
     padding: 20px 0;
     align-items: center;
   }
+  .hero {
+    margin-bottom: 40px;   /* NEW: add breathing room below hero */
+  }
   .hero img {
     max-height: 48vh;
-    min-height: 280px;
+    min-height: 240px;
   }
   h1 {
     font-size: 32px;
@@ -266,8 +266,11 @@ h1 {
   .container {
     padding: 0 20px; /* mobile spacing */
   }
+  .main {
+    gap: 16px;
+  }
   .brand-logo img {
-    width: 60px;
+    width: 30px;
   }
   .brand-text {
     font-size: 18px;
@@ -290,11 +293,21 @@ h1 {
     width: 42px;
     height: 42px;
   }
+  .hero img {
+    max-height: 35vh;
+    min-height: 160px;
+  }
+  .foot {
+    padding: 16px 0;
+  }
 }
 
 @media(max-width:480px) {
+  .main {
+    gap: 12px;
+  }
   .brand-logo img {
-    width: 50px;
+    width: 30px;
   }
   .brand-text {
     font-size: 16px;
@@ -311,8 +324,8 @@ h1 {
     font-size: 12px;
   }
   .hero img {
-    max-height: 40vh;
-    min-height: 220px;
+    max-height: 35vh;
+    min-height: 150px;
   }
   .foot {
     padding: 16px 0;
