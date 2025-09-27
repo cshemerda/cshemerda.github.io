@@ -16,45 +16,103 @@
 </head>
 <body>
   <div class="wrap">
-    <!-- Header -->
-    <header class="top">
-      <div class="brand">
-        <img src="../assets/qpoplogo.png" alt="QPOP Logo">
-        <span>QPOP</span>
-      </div>
-      <div class="social">
-        <a href="#"><i class="fab fa-twitter"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-linkedin"></i></a>
-      </div>
-    </header>
-
-    <!-- Main -->
-    <main class="main">
-      <section class="left">
-        <div class="tag">COMING SOON</div>
-        <h1>Our new website<br>is on its way.</h1>
-        <p class="lead">Sign up to be the first to know<br>when we launch.</p>
-        <form class="form" onsubmit="return false">
-          <input type="email" placeholder="Enter Your Email Here.." required />
-          <button type="submit"><svg viewBox="0 0 24 24"><path d="M4 11h12.586l-4.293-4.293 1.414-1.414L20.414 12l-6.707 6.707-1.414-1.414L16.586 13H4v-2z"/></svg></button>
-        </form>
-      </section>
-      <aside class="hero-col">
-        <div class="hero bounce">
-          <img src="../assets/Chatboxx.png" alt="Chatbox">
+    <div class="container">
+      <!-- Header -->
+      <header class="top">
+        <div class="brand">
+          <a href="/" class="brand-logo">
+            <img src="../assets/qpoplogo.png" alt="QPOP Logo">
+          </a>
+          <a href="/" class="brand-text">QPOP</a>
         </div>
-      </aside>
-    </main>
+        <div class="social">
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </header>
 
-    <!-- Footer -->
-    <div class="foot">
-      <div class="contact">
-        <svg viewBox="0 0 512 512"><path d="M502.3 190.8l-192 160c-23.6 19.7..."/></svg>
-        <span><a href="mailto:irshad_meer@hotmail.com">irshad_meer@hotmail.com</a></span>
+      <!-- Main -->
+      <main class="main">
+        <section class="left">
+          <div class="tag">COMING SOON</div>
+          <h1>Our new website<br>is on its way.</h1>
+          <p class="lead">Sign up to be the first to know<br>when we launch.</p>
+
+          <!-- Subscribe Form -->
+          <form class="form" id="notifyForm" onsubmit="return false">
+            <input id="emailInput" name="email" type="email" placeholder="Enter Your Email Here.." required />
+            <button type="submit" aria-label="Submit email">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 11h12.586l-4.293-4.293 1.414-1.414L20.414 12l-6.707 6.707-1.414-1.414L16.586 13H4v-2z"/>
+              </svg>
+            </button>
+          </form>
+
+          <!-- Feedback message -->
+          <div id="formMsg" class="form-msg" role="status" aria-live="polite"></div>
+        </section>
+
+        <aside class="hero-col">
+          <div class="hero bounce">
+            <img src="../assets/Chatboxx.png" alt="Chatbox">
+          </div>
+        </aside>
+      </main>
+
+      <!-- Footer -->
+      <div class="foot">
+        <div class="contact">
+          <svg viewBox="0 0 512 512" aria-hidden="true"><path d="M502.3 190.8l-192 160c-23.6 19.7..."/></svg>
+          <span><a href="mailto:support@qpop.gg">support@qpop.gg</a></span>
+        </div>
       </div>
     </div>
   </div>
+
+  <!-- Tiny inline script to handle Formspree OR mailto fallback -->
+  <script>
+    const FORMSPREE_ENDPOINT = "https://formspree.io/f/xldpgbbb";
+
+    const form = document.getElementById('notifyForm');
+    const emailInput = document.getElementById('emailInput');
+    const msg = document.getElementById('formMsg');
+
+    function showMessage(text, type = 'ok') {
+      msg.textContent = text;
+      msg.classList.remove('is-ok', 'is-err');
+      msg.classList.add(type === 'ok' ? 'is-ok' : 'is-err');
+    }
+
+    form.addEventListener('submit', async () => {
+      const email = emailInput.value.trim();
+      if (!email) return;
+
+      if (FORMSPREE_ENDPOINT) {
+        try {
+          showMessage('Sending...', 'ok');
+          const res = await fetch(FORMSPREE_ENDPOINT, {
+            method: 'POST',
+            headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, to: 'support@qpop.gg' })
+          });
+
+          if (res.ok) {
+            showMessage("Thanks! We'll let you know when we launch.", 'ok');
+            form.reset();
+          } else {
+            showMessage('Hmm, something went wrong. Try again in a moment.', 'err');
+          }
+        } catch (e) {
+          showMessage('Network error. Please try again.', 'err');
+        }
+        return;
+      }
+
+      const subject = encodeURIComponent('Notify me when QPOP launches');
+      const body = encodeURIComponent(`Please notify me at: ${email}`);
+      window.location.href = `mailto:support@qpop.gg?subject=${subject}&body=${body}`;
+    });
+  </script>
 </body>
 </html>
-

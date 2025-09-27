@@ -8,52 +8,69 @@ body{font-family:"Inter",sans-serif;color:#111;background:#fff;line-height:1.35}
   height:100vh;
 }
 
+/* Centered container */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px; /* safety padding on small screens */
+}
+
 /* Top bar */
 .top{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:30px 100px; /* equal padding left/right */
+  padding:30px 0;
 }
 
 /* Brand with logo + text */
 .brand {
-  position: relative;
   display: flex;
   align-items: center;
+  gap: 6px;
+}
+
+.brand-logo img {
+  width: 80px;
+  height: auto;
+  object-fit: contain;
+  filter: brightness(0) invert(0);
+  transition: filter 0.3s, transform 0.3s;
+}
+.brand-logo:hover img {
+  filter: brightness(0.3);
+  transform: scale(1.05);
+}
+
+.brand-text {
   font-family:"Poppins",sans-serif;
   font-weight:700;
   font-size:22px;
   letter-spacing:1px;
+  text-decoration:none;
+  color:#111;
+  transition:color 0.3s, transform 0.3s;
 }
-
-.brand img {
-  width: 80px;
-  height: auto;
-  object-fit: contain;
-  filter: brightness(0) invert(0); /* make black */
-}
-
-.brand span {
-  position: absolute;
-  left: 85px; 
-  top: 50%;
-  transform: translateY(-50%);
+.brand-text:hover {
+  color:#555;
+  transform: scale(1.05);
 }
 
 /* Social icons */
 .social {
   display:flex;
   gap:22px;
-  font-size:22px; /* bigger icons */
+  font-size:22px;
   align-items:center;
 }
 .social a {
   color:#111;
-  transition:color 0.3s;
+  transition:color 0.3s, transform 0.3s;
 }
 .social a:hover {
   color:#555;
+  transform: scale(1.1);
 }
 
 /* Main */
@@ -61,7 +78,7 @@ body{font-family:"Inter",sans-serif;color:#111;background:#fff;line-height:1.35}
   display:grid;
   grid-template-columns:1fr 0.9fr;
   gap:56px;
-  padding:0 100px;
+  padding:0;
   align-items:center;
 }
 .left{display:flex;flex-direction:column;justify-content:center}
@@ -103,6 +120,15 @@ h1{
 .form button svg{width:15px;height:15px;fill:#fff}
 .form button:hover{background:#333}
 
+/* Feedback message */
+.form-msg{
+  font-size:13px;
+  margin-top:8px;
+  min-height:18px;
+}
+.form-msg.is-ok{ color:#2e7d32; }
+.form-msg.is-err{ color:#b71c1c; }
+
 /* Right image */
 .hero-col{display:flex;align-items:center;justify-content:center}
 .hero{
@@ -132,7 +158,7 @@ h1{
 
 /* Bottom contact */
 .foot{
-  padding:40px 100px;
+  padding:40px 0;
   display:flex;
   align-items:center;
   justify-content:flex-start;
@@ -142,17 +168,95 @@ h1{
 .contact a{color:inherit;text-decoration:none}
 .contact a:hover{text-decoration:underline}
 
-/* Responsive */
-@media(max-width:980px){
-  .main{grid-template-columns:1fr;gap:28px;padding:0 40px}
-  .left{padding:20px 0}
-  .hero{height:48vh;min-height:280px}
-  .foot{padding:20px 40px}
-  h1{font-size:32px;}
+/* Responsive adjustments */
+@media(max-width:1200px){
+  .main {
+    gap: 40px;
+  }
+  h1 {
+    font-size: 40px;
+  }
 }
-@media(max-width:560px){
-  .top{padding:20px}
-  .main{padding:0 20px}
-  .foot{padding:20px}
-  .form input{width:100%}
+
+@media(max-width:980px){
+  .top {
+    padding: 20px 0;
+  }
+  .main {
+    grid-template-columns:1fr;
+    gap:28px;
+    text-align: center;
+  }
+  .left {
+    padding:20px 0;
+    align-items:center;
+  }
+  .hero {
+    height: 48vh;
+    min-height: 280px;
+  }
+  h1 {
+    font-size:32px;
+  }
+  .form {
+    justify-content:center;
+  }
+}
+
+@media(max-width:720px){
+  .brand-logo img {
+    width: 60px;
+  }
+  .brand-text {
+    font-size:18px;
+  }
+  .social {
+    font-size:20px;
+    gap:16px;
+  }
+  h1 {
+    font-size:28px;
+  }
+  .lead {
+    font-size:13px;
+  }
+  .form input {
+    width: 100%;
+    font-size: 12px;
+  }
+  .form button {
+    width: 42px;
+    height: 42px;
+  }
+}
+
+@media(max-width:480px){
+  .top {
+    padding: 16px 0;
+  }
+  .brand-logo img {
+    width: 50px;
+  }
+  .brand-text {
+    font-size:16px;
+  }
+  .social {
+    font-size:18px;
+    gap:12px;
+  }
+  h1 {
+    font-size:24px;
+    line-height: 1.2;
+  }
+  .lead {
+    font-size:12px;
+  }
+  .hero {
+    height: 40vh;
+    min-height: 220px;
+  }
+  .foot {
+    padding:16px 0;
+    font-size:12px;
+  }
 }
