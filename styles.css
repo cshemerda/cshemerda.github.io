@@ -1,0 +1,158 @@
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%;margin:0;overflow:hidden}
+body{font-family:"Inter",sans-serif;color:#111;background:#fff;line-height:1.35}
+
+.wrap{
+  display:grid;
+  grid-template-rows:auto 1fr auto;
+  height:100vh;
+}
+
+/* Top bar */
+.top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:30px 100px; /* equal padding left/right */
+}
+
+/* Brand with logo + text */
+.brand {
+  position: relative;
+  display: flex;
+  align-items: center;
+  font-family:"Poppins",sans-serif;
+  font-weight:700;
+  font-size:22px;
+  letter-spacing:1px;
+}
+
+.brand img {
+  width: 80px;
+  height: auto;
+  object-fit: contain;
+  filter: brightness(0) invert(0); /* make black */
+}
+
+.brand span {
+  position: absolute;
+  left: 85px; 
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Social icons */
+.social {
+  display:flex;
+  gap:22px;
+  font-size:22px; /* bigger icons */
+  align-items:center;
+}
+.social a {
+  color:#111;
+  transition:color 0.3s;
+}
+.social a:hover {
+  color:#555;
+}
+
+/* Main */
+.main{
+  display:grid;
+  grid-template-columns:1fr 0.9fr;
+  gap:56px;
+  padding:0 100px;
+  align-items:center;
+}
+.left{display:flex;flex-direction:column;justify-content:center}
+.tag{font-size:12px;font-weight:600;letter-spacing:1px;color:#777;margin-bottom:12px}
+h1{
+  font-family:"Poppins",sans-serif;
+  font-weight:600;
+  font-size:48px;
+  line-height:1.25;
+  margin:0 0 14px;
+}
+.lead{font-size:14px;color:#666;margin:0 0 22px}
+
+/* Form */
+.form{display:flex;align-items:stretch;margin-bottom:28px}
+.form input{
+  width:280px;
+  height:42px;
+  border:1px solid #111;
+  border-right:0;
+  padding:0 12px;
+  font-size:13px;
+  background:#fff;
+  color:#111;
+  border-radius:6px 0 0 6px;
+}
+.form input::placeholder{color:#9a9a9a}
+.form button{
+  width:46px;
+  height:42px;
+  border:1px solid #111;
+  background:#111;
+  display:grid;
+  place-items:center;
+  cursor:pointer;
+  border-radius:0 6px 6px 0;
+  transition:background 0.3s;
+}
+.form button svg{width:15px;height:15px;fill:#fff}
+.form button:hover{background:#333}
+
+/* Right image */
+.hero-col{display:flex;align-items:center;justify-content:center}
+.hero{
+  height:80vh;
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+.hero img{
+  max-width:90%;
+  max-height:90%;
+  height:auto;
+  object-fit:contain;
+  object-position:center;
+}
+
+/* Bounce animation */
+.bounce{
+  animation:bounce 6s ease-in-out infinite;
+}
+@keyframes bounce{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-20px)}
+}
+
+/* Bottom contact */
+.foot{
+  padding:40px 100px;
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+}
+.contact{display:flex;align-items:center;gap:8px;color:#333;font-size:14px}
+.contact svg{width:15px;height:15px;flex:none;fill:#111}
+.contact a{color:inherit;text-decoration:none}
+.contact a:hover{text-decoration:underline}
+
+/* Responsive */
+@media(max-width:980px){
+  .main{grid-template-columns:1fr;gap:28px;padding:0 40px}
+  .left{padding:20px 0}
+  .hero{height:48vh;min-height:280px}
+  .foot{padding:20px 40px}
+  h1{font-size:32px;}
+}
+@media(max-width:560px){
+  .top{padding:20px}
+  .main{padding:0 20px}
+  .foot{padding:20px}
+  .form input{width:100%}
+}
